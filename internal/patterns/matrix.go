@@ -36,7 +36,7 @@ func RemoveElement(slice []*Line, s int) []*Line {
 }
 
 func RandomLetter() rune {
-  return alphabet[util.RandomBetween(0, len(alphabet))]
+  return alphabet[util.RandomBetween(0, len(alphabet) - 1)]
 }
 
 func PrintMatrix(height int) {
@@ -48,18 +48,14 @@ func PrintMatrix(height int) {
       fmt.Print(" ")
     }
     line.letters = append(line.letters, RandomLetter())
-    for r := y; r > y - int(math.Min(float64(len(line.letters)), float64(line.length))); r -- {
-      if r < height {
-        util.CursorPos(x, r)
-        var color util.ANSIColor = util.BLACK
-        if (y == r) {
-          color = util.BRIGHT_GREEN
-        } else if (y - r < (3 * line.length / 4)) {
-          color = util.GREEN
-        } else {
-          color = util.BRIGHT_BLACK
-        }
-        fmt.Printf(util.ApplyColor("%c", color), line.letters[y - r])
+    // prevents overflow by printing all letters based on number of letters
+    numLetters := int(math.Min(float64(line.length), float64(len(line.letters))))
+    for r := 0; r < numLetters; r++ {
+      if y - r < height && y - r > 0 {
+        util.CursorPos(x, y - r)
+        color := util.CreateHSV(120, 100, 20 + int(80 * (float64(float64(numLetters - r) / float64(numLetters)))))
+        fmt.Print(color.ToTrueColor())
+        fmt.Printf("%c", line.letters[r])
       }
     }
   }
@@ -97,7 +93,6 @@ func TestMatrix() {
         lines = RemoveElement(lines, i)
       }
     }
-    // move lines down
 
     util.SaveCursor()
     PrintMatrix(height)

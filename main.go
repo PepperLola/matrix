@@ -1,9 +1,9 @@
 package main
 
 import (
-	patterns "github.com/PepperLola/matrix/internal/patterns"
+  patterns "github.com/PepperLola/matrix/internal/patterns"
 )
 
 func main() {
-	patterns.TestMatrix()
+  patterns.TestMatrix()
 }

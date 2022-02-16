@@ -66,9 +66,8 @@ func TestMatrix() {
   if err != nil {
     panic(err)
   }
-  //util.ClearScreen()
-  fmt.Print("\033[?25l")
-  fmt.Print("\033[2J")
+  util.ClearScreen()
+  util.HideCursor()
 
   for true {
     if cooldown <= 0 {

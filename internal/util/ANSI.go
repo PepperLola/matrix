@@ -2,9 +2,6 @@ package util
 
 import (
   "fmt"
-  "os"
-  "os/exec"
-  "runtime"
 )
 
 type ANSIColor int
@@ -56,19 +53,15 @@ func ApplyColor(text string, color ANSIColor) string {
 }
 
 func ClearScreen() {
-  switch (runtime.GOOS) {
-    case "linux":
-    case "darwin":
-      cmd := exec.Command("clear")
-      cmd.Stdout = os.Stdout
-      cmd.Run()
-      break
-    case "windows":
-      cmd := exec.Command("cmd", "/c", "cls")
-      cmd.Stdout = os.Stdout
-      cmd.Run()
-      break
-  }
+  fmt.Print("\033[2J")
+}
+
+func ShowCursor() {
+  fmt.Print("\033[?25h")
+}
+
+func HideCursor() {
+  fmt.Print("\033[?25l")
 }
 
 func SaveCursor() {

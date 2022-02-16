@@ -15,6 +15,8 @@ import (
   "github.com/PepperLola/matrix/internal/util"
 )
 
+var width, height, err = term.GetSize(0)
+
 func OpenImage(path string) image.Image {
   fSrc, err := os.Open(path)
   if err != nil {
@@ -47,23 +49,23 @@ func OpenGif(path string) gif.GIF {
 }
 
 func ResizeImage(src image.Image, amount float64) image.Image {
+  imgWidth, imgHeight := src.Bounds().Max.X - src.Bounds().Min.X, src.Bounds().Max.Y - src.Bounds().Min.Y
+  if amount == -1 {
+    // scale to fit
+    amount = math.Min(float64(width) / float64(imgWidth), float64(height) / float64(imgHeight))
+  }
   dst := image.NewRGBA(image.Rect(0, 0, int(float64(src.Bounds().Max.X) * amount), int(float64(src.Bounds().Max.Y) * amount)))
   draw.NearestNeighbor.Scale(dst, dst.Rect, src, src.Bounds(), draw.Over, nil)
   return dst
 }
 
 func DisplayGif(src gif.GIF, scale float64) {
-  width, height, err := term.GetSize(0)
   if err != nil {
     panic(err)
   }
   util.ClearScreen()
   util.HideCursor()
   i := 0
-  if scale == -1 {
-    // scale to fit
-    scale = math.Min(float64(width) / float64(src.Config.Width), float64(height) / float64(src.Config.Width))
-  }
   for src.LoopCount < 1 || i < src.LoopCount * len(src.Image) {
     frame := src.Image[i % len(src.Image)]
     frameImg := ResizeImage(frame, scale)
@@ -81,7 +83,7 @@ func DisplayImage(src image.Image) {
     for x := src.Bounds().Min.X; x < src.Bounds().Max.X; x += 1 {
       c := color.RGBAModel.Convert(src.At(x, y)).(color.RGBA)
       g := color.GrayModel.Convert(src.At(x, y)).(color.Gray)
-      level := int(math.Min(float64((g.Y / 51 + c.A / 51) / 2), float64(5))) // 51 * 5 = 255
+      level := int(math.Min(float64((g.Y / 51 + c.A / 51) / 2), float64(4))) // 51 * 5 = 255
       util.CursorPos(x * 2, y)
       col := util.CreateRGB(int(c.R), int(c.G), int(c.B))
       fmt.Print((&col).ToTrueColor())

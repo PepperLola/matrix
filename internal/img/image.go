@@ -57,7 +57,6 @@ func DisplayGif(src gif.GIF, scale float64) {
   if err != nil {
     panic(err)
   }
-  fmt.Println(src.Image[0])
   util.ClearScreen()
   util.HideCursor()
   i := 0
@@ -68,14 +67,14 @@ func DisplayGif(src gif.GIF, scale float64) {
   for src.LoopCount < 1 || i < src.LoopCount * len(src.Image) {
     frame := src.Image[i % len(src.Image)]
     frameImg := ResizeImage(frame, scale)
-    PrintFrame(frameImg)
+    DisplayImage(frameImg)
 
     time.Sleep(100 * time.Millisecond)
     i++
   }
 }
 
-func PrintFrame(src image.Image) {
+func DisplayImage(src image.Image) {
   levels := []string{" ", "░", "▒", "▓", "█"}
 
   for y := src.Bounds().Min.Y; y < src.Bounds().Max.Y; y++ {

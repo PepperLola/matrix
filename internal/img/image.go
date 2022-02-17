@@ -19,6 +19,7 @@ var frameCache []image.Image = []image.Image{}
 
 var width, height, err = term.GetSize(0)
 
+// OpenImage opens an image from a path and returns an image.Image object
 func OpenImage(path string) image.Image {
 	fSrc, err := os.Open(path)
 	if err != nil {
@@ -33,6 +34,7 @@ func OpenImage(path string) image.Image {
 	return src
 }
 
+// OpenGif opens a gif from a path and returns a gif.GIF object
 func OpenGif(path string) gif.GIF {
 	fSrc, err := os.Open(path)
 	if err != nil {
@@ -50,6 +52,7 @@ func OpenGif(path string) gif.GIF {
 	return *gif
 }
 
+// ResizeImage resizes an image.Image object by multiplying its size by a float64 value. Uses nearest neighbor interpolation.
 func ResizeImage(src image.Image, amount float64) image.Image {
 	imgWidth, imgHeight := src.Bounds().Max.X-src.Bounds().Min.X, src.Bounds().Max.Y-src.Bounds().Min.Y
 	if amount == -1 {
@@ -61,6 +64,7 @@ func ResizeImage(src image.Image, amount float64) image.Image {
 	return dst
 }
 
+// DisplayGif displays a gif.GIF at an integer fps, with a float64 scale.
 func DisplayGif(fps int, src gif.GIF, scale float64) {
 	if err != nil {
 		panic(err)
@@ -85,11 +89,12 @@ func DisplayGif(fps int, src gif.GIF, scale float64) {
 	}
 }
 
+// DisplayImage renders an image.Image using ASCII text in the console
 func DisplayImage(src image.Image) {
 	levels := []string{" ", "░", "▒", "▓", "█"}
 
 	for y := src.Bounds().Min.Y; y < src.Bounds().Max.Y; y++ {
-		for x := src.Bounds().Min.X; x < src.Bounds().Max.X; x += 1 {
+		for x := src.Bounds().Min.X; x < src.Bounds().Max.X; x ++ {
 			c := color.RGBAModel.Convert(src.At(x, y)).(color.RGBA)
 			g := color.GrayModel.Convert(src.At(x, y)).(color.Gray)
 			level := int(math.Min(float64((g.Y/51+c.A/51)/2), float64(4))) // 51 * 5 = 255

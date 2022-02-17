@@ -4,26 +4,45 @@ import (
 	"fmt"
 )
 
+// ANSIColor is a color in an ANSI format
 type ANSIColor int
 
 const (
+  // BLACK ANSI color
 	BLACK ANSIColor = iota
+  // RED ANSI color
 	RED
+  // GREEN ANSI color
 	GREEN
+  // YELLOW ANSI color
 	YELLOW
+	// BLUE ANSI color
 	BLUE
+	// MAGENTA ANSI color
 	MAGENTA
+	// CYAN ANSI color
 	CYAN
+	// WHITE ANSI color
 	WHITE
-	BRIGHT_BLACK
-	BRIGHT_RED
-	BRIGHT_GREEN
-	BRIGHT_YELLOW
-	BRIGHT_BLUE
-	BRIGHT_MAGENTA
-	BRIGHT_CYAN
-	BRIGHT_WHITE
+	// BRIGHTBLACK ANSI color
+	BRIGHTBLACK
+	// BRIGHTRED ANSI color
+	BRIGHTRED
+	// BRIGHTGREEN ANSI color
+	BRIGHTGREEN
+	// BRIGHTYELLOW ANSI color
+	BRIGHTYELLOW
+	// BRIGHTBLUE ANSI color
+	BRIGHTBLUE
+	// BRIGHTMAGENTA ANSI color
+	BRIGHTMAGENTA
+	// BRIGHTCYAN ANSI color
+	BRIGHTCYAN
+	// BRIGHTWHITE ANSI color
+	BRIGHTWHITE
+	// DEFAULT ANSI color
 	DEFAULT
+	// RESET ANSI color
 	RESET
 )
 
@@ -36,30 +55,34 @@ var colors = map[ANSIColor]string{
 	MAGENTA:        "35",
 	CYAN:           "36",
 	WHITE:          "37",
-	BRIGHT_BLACK:   "90",
-	BRIGHT_RED:     "91",
-	BRIGHT_GREEN:   "92",
-	BRIGHT_YELLOW:  "93",
-	BRIGHT_BLUE:    "94",
-	BRIGHT_MAGENTA: "95",
-	BRIGHT_CYAN:    "96",
-	BRIGHT_WHITE:   "97",
+	BRIGHTBLACK:   "90",
+	BRIGHTRED:     "91",
+	BRIGHTGREEN:   "92",
+	BRIGHTYELLOW:  "93",
+	BRIGHTBLUE:    "94",
+	BRIGHTMAGENTA: "95",
+	BRIGHTCYAN:    "96",
+	BRIGHTWHITE:   "97",
 	DEFAULT:        "39",
 	RESET:          "0",
 }
 
+// ApplyColor applies an ANSI color to given string by prepending the color code.
 func ApplyColor(text string, color ANSIColor) string {
 	return "\033[" + colors[color] + "m" + text
 }
 
+// ClearScreen uses an ASCII escape sequence to clear the screen
 func ClearScreen() {
 	fmt.Print("\033[2J")
 }
 
+// ShowCursor uses an ASCII escape sequence to show the cursor
 func ShowCursor() {
 	fmt.Print("\033[?25h")
 }
 
+// HideCursor uses an ASCII escape sequence to hide the cursor
 func HideCursor() {
 	fmt.Print("\033[?25l")
 }

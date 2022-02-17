@@ -8,13 +8,13 @@ import (
 type ANSIColor int
 
 const (
-  // BLACK ANSI color
+	// BLACK ANSI color
 	BLACK ANSIColor = iota
-  // RED ANSI color
+	// RED ANSI color
 	RED
-  // GREEN ANSI color
+	// GREEN ANSI color
 	GREEN
-  // YELLOW ANSI color
+	// YELLOW ANSI color
 	YELLOW
 	// BLUE ANSI color
 	BLUE
@@ -47,14 +47,14 @@ const (
 )
 
 var colors = map[ANSIColor]string{
-	BLACK:          "30",
-	RED:            "31",
-	GREEN:          "32",
-	YELLOW:         "33",
-	BLUE:           "34",
-	MAGENTA:        "35",
-	CYAN:           "36",
-	WHITE:          "37",
+	BLACK:         "30",
+	RED:           "31",
+	GREEN:         "32",
+	YELLOW:        "33",
+	BLUE:          "34",
+	MAGENTA:       "35",
+	CYAN:          "36",
+	WHITE:         "37",
 	BRIGHTBLACK:   "90",
 	BRIGHTRED:     "91",
 	BRIGHTGREEN:   "92",
@@ -63,8 +63,8 @@ var colors = map[ANSIColor]string{
 	BRIGHTMAGENTA: "95",
 	BRIGHTCYAN:    "96",
 	BRIGHTWHITE:   "97",
-	DEFAULT:        "39",
-	RESET:          "0",
+	DEFAULT:       "39",
+	RESET:         "0",
 }
 
 // ApplyColor applies an ANSI color to given string by prepending the color code.

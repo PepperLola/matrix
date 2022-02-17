@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+// HSVtoRGB converts an HSVColor to an RGBColor
 func HSVtoRGB(color HSVColor) RGBColor {
 	r, g, b := 0.0, 0.0, 0.0
 	h, s, v := float64(color.getH()), float64(color.getS()), float64(color.getV())
@@ -42,6 +43,7 @@ func HSVtoRGB(color HSVColor) RGBColor {
 	return CreateRGB(int(r*255), int(g*255), int(b*255))
 }
 
+// RGBtoHSV converts an RGBColor to an HSVColor
 func RGBtoHSV(color RGBColor) HSVColor {
 	r := float64(color.getR()) / 255.0
 	g := float64(color.getG()) / 255.0

@@ -87,34 +87,42 @@ func HideCursor() {
 	fmt.Print("\033[?25l")
 }
 
+// SaveCursor uses an ASCII escape sequence to save the cursor position
 func SaveCursor() {
 	fmt.Print("\033[s")
 }
 
+// RestoreCursor uses an ASCII escape sequence to restore the cursor position
 func RestoreCursor() {
 	fmt.Print("\033[u")
 }
 
+// CursorHome uses an ASCII escape sequence to move the cursor to its home position, usually (1, 1), or top left
 func CursorHome() {
 	fmt.Print("\033[H")
 }
 
+// CursorPos uses an ASCII escape sequence to move the cursor to a set column and row (x,y). Top left is (1,1)
 func CursorPos(c int, r int) {
 	fmt.Print("\033[" + fmt.Sprint(r) + ";" + fmt.Sprint(c) + "H")
 }
 
+// CursorUp uses an ASCII escape sequence to move the cursor up n rows
 func CursorUp(n int) {
 	fmt.Print("\033[" + fmt.Sprint(n) + "A")
 }
 
+// CursorDown uses an ASCII escape sequence to move the cursor down n rows
 func CursorDown(n int) {
 	fmt.Print("\033[" + fmt.Sprint(n) + "B")
 }
 
+// CursorRight uses an ASCII escape sequence to move the cursor right n columns
 func CursorRight(n int) {
 	fmt.Print("\033[" + fmt.Sprint(n) + "C")
 }
 
+// CursorLeft uses an ASCII escape sequence to move the cursor left n columns
 func CursorLeft(n int) {
 	fmt.Print("\033[" + fmt.Sprint(n) + "D")
 }

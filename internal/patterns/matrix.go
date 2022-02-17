@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// Line a matrix line in the matrix pattern
 type Line struct {
 	x       int
 	y       int
@@ -20,9 +21,9 @@ type Line struct {
 var lines = []*Line{}
 var lastLineForCol = map[int]*Line{}
 
-var MIN_LINE_GAP = 4
-var MIN_LINE_LENGTH = 30
-var MAX_LINE_LENGTH = 50
+var minLineGap = 4
+var minLineLength = 30
+var maxLineLength = 50
 
 var cooldown = 0
 
@@ -31,10 +32,12 @@ var latin []string = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
 var numbers []string = []string{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
 var alphabet = append(kana, append(latin, numbers...)...)
 
+// RemoveElement removes an element at an index in an array
 func RemoveElement(slice []*Line, s int) []*Line {
 	return append(slice[:s], slice[s+1:]...)
 }
 
+// RandomLetter gets a random letter from the provided alphabet
 func RandomLetter() string {
 	if len(alphabet) < 1 {
 		return "█"
@@ -44,6 +47,7 @@ func RandomLetter() string {
 	return alphabet[util.RandomBetween(0, len(alphabet)-1)]
 }
 
+// PrintMatrix prints out all of the lines to the console
 func PrintMatrix(height int, word bool) {
 	for _, line := range lines {
 		x := line.x
@@ -63,7 +67,7 @@ func PrintMatrix(height int, word bool) {
 			if y-r < height && y-r > 0 {
 				util.CursorPos(x, y-r)
 				if r == 0 {
-					fmt.Print(util.ApplyColor("", util.BRIGHT_WHITE))
+					fmt.Print(util.ApplyColor("", util.BRIGHTWHITE))
 				} else {
 					color := util.CreateHSV(120, 100, 20+int(80*(float64(float64(numLetters-r)/float64(numLetters)))))
 					fmt.Print(color.ToTrueColor())
@@ -74,6 +78,7 @@ func PrintMatrix(height int, word bool) {
 	}
 }
 
+// StartMatrix manages and adds lines and controls the animation loop
 func StartMatrix(fps int, customAlphabet string, interval int, word bool) {
 	if len(customAlphabet) > 0 {
 		alphabet = strings.Split(customAlphabet, "")
@@ -90,12 +95,12 @@ func StartMatrix(fps int, customAlphabet string, interval int, word bool) {
 			cooldown = interval
 			col := rand.Intn(width)
 			lastLine, contains := lastLineForCol[col]
-			for contains && (*lastLine).y-(*lastLine).length < MIN_LINE_GAP {
+			for contains && (*lastLine).y-(*lastLine).length < minLineGap {
 				col = rand.Intn(width)
 				lastLine, contains = lastLineForCol[col]
 			}
 			newLine := Line{
-				col, 0, util.RandomBetween(MIN_LINE_LENGTH, MAX_LINE_LENGTH), []string{},
+				col, 0, util.RandomBetween(minLineLength, maxLineLength), []string{},
 			}
 			lines = append(lines, &newLine)
 			lastLineForCol[col] = &newLine

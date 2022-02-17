@@ -1,6 +1,6 @@
 # Matrix
 
-*A command line program for cool patterns.*
+*A screensaver but for the command line.*
 
 ---
 

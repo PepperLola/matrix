@@ -4,6 +4,13 @@
 
 ---
 
+![GitHub issues](https://img.shields.io/github/issues-raw/PepperLola/matrix)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PepperLola/matrix)
+![MIT License](https://img.shields.io/github/license/PepperLola/matrix)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/PepperLola/matrix)
+
+![Command Line Example](./img/matrix.png)
+
 ## What is it?
 Matrix was originally just a program to output a matrix-style rain effect to the console. I created it because I had just installed tmux, and thought it would look cool to be editing something in vim in one pane and having a matrix effect in another (and I was right :D). I'm always looking to add more effects and customization, because why not, it's cool.
 

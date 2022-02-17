@@ -61,7 +61,7 @@ func ResizeImage(src image.Image, amount float64) image.Image {
   return dst
 }
 
-func DisplayGif(src gif.GIF, scale float64) {
+func DisplayGif(fps int, src gif.GIF, scale float64) {
   if err != nil {
     panic(err)
   }
@@ -80,7 +80,7 @@ func DisplayGif(src gif.GIF, scale float64) {
     }
     DisplayImage(frameImg)
 
-    time.Sleep(100 * time.Millisecond)
+    time.Sleep(time.Second / time.Duration(fps))
     i++
   }
 }

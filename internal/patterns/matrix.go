@@ -70,7 +70,7 @@ func PrintMatrix(height int, word bool) {
   }
 }
 
-func StartMatrix(customAlphabet string, interval int, word bool) {
+func StartMatrix(fps int, customAlphabet string, interval int, word bool) {
   if len(customAlphabet) > 0 {
     alphabet = strings.Split(customAlphabet, "")
   }
@@ -108,6 +108,6 @@ func StartMatrix(customAlphabet string, interval int, word bool) {
     util.SaveCursor()
     PrintMatrix(height, word)
     util.RestoreCursor()
-    time.Sleep(100 * time.Millisecond)
+    time.Sleep(time.Second / time.Duration(fps))
   }
 }

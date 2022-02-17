@@ -15,6 +15,8 @@ import (
   "github.com/PepperLola/matrix/internal/util"
 )
 
+var frameCache []image.Image = []image.Image{}
+
 var width, height, err = term.GetSize(0)
 
 func OpenImage(path string) image.Image {
@@ -67,8 +69,15 @@ func DisplayGif(src gif.GIF, scale float64) {
   util.HideCursor()
   i := 0
   for src.LoopCount < 1 || i < src.LoopCount * len(src.Image) {
-    frame := src.Image[i % len(src.Image)]
-    frameImg := ResizeImage(frame, scale)
+    frameIdx := i % len(src.Image)
+    var frameImg image.Image
+    if len(frameCache) <= frameIdx {
+      frame := src.Image[frameIdx]
+      frameImg = ResizeImage(frame, scale)
+      frameCache = append(frameCache, frameImg)
+    } else {
+      frameImg = frameCache[frameIdx]
+    }
     DisplayImage(frameImg)
 
     time.Sleep(100 * time.Millisecond)

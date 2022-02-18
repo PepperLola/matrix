@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"github.com/PepperLola/matrix/internal/img"
 	"github.com/PepperLola/matrix/internal/patterns"
 )
 
@@ -28,12 +27,10 @@ func main() {
 		patterns.StartMatrix(fps, alphabet, interval, word)
 		break
 	case "image":
-		image := img.OpenImage(path)
-		img.DisplayImage(img.ResizeImage(image, scale))
+		patterns.DisplayImage(path, scale)
 		break
 	case "gif":
-		image := img.OpenGif(path)
-		img.DisplayGif(fps, image, scale)
+		patterns.StartGIF(fps, path, scale)
 		break
 	}
 }

@@ -2,11 +2,13 @@ package util
 
 import (
 	"fmt"
-  "strconv"
+	"strconv"
 )
 
 // ANSIColor is a color in an ANSI format
 type ANSIColor int
+
+// ANSIFormat is a text format in an ANSI format
 type ANSIFormat int
 
 // Defaults
@@ -19,14 +21,14 @@ const (
 
 // Formatting
 const (
-  BOLD ANSIFormat = 1
-  DIM = 2
-  ITALIC = 3
-  UNDERLINE = 4
-  BLINKING = 5
-  INVERSE = 7
-  INVISIBLE = 8
-  STRIKETHROUGH = 9
+	BOLD          ANSIFormat = 1
+	DIM                      = 2
+	ITALIC                   = 3
+	UNDERLINE                = 4
+	BLINKING                 = 5
+	INVERSE                  = 7
+	INVISIBLE                = 8
+	STRIKETHROUGH            = 9
 )
 
 // Not bright colors
@@ -76,17 +78,17 @@ func ApplyForegroundColor(text string, color ANSIColor) string {
 
 // ApplyBackgroundColor applies an ANSI color to the background of a given string
 func ApplyBackgroundColor(text string, color ANSIColor) string {
-  return "\033[" + strconv.Itoa(int(color) + 10) + "m" + text
+	return "\033[" + strconv.Itoa(int(color)+10) + "m" + text
 }
 
 // ApplyFormatting applies ANSI format to text
 func ApplyFormatting(text string, format ANSIFormat) string {
-  return "\033[" + strconv.Itoa(int(format)) + "m" + text
+	return "\033[" + strconv.Itoa(int(format)) + "m" + text
 }
 
 // ResetFormatting resets formatting of text
 func ResetFormatting(text string, format ANSIFormat) string {
-  return "\033[" + strconv.Itoa(int(format) + 20) + "m" + text
+	return "\033[" + strconv.Itoa(int(format)+20) + "m" + text
 }
 
 // ClearScreen uses an ASCII escape sequence to clear the screen

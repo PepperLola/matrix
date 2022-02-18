@@ -49,9 +49,14 @@ func (c *RGBColor) ToRGB() RGBColor {
 	return *c
 }
 
-// ToTrueColor generates an ANSI Truecolor code representing an RGBColor
-func (c *RGBColor) ToTrueColor() string {
+// ToForegroundTrueColor generates a foreground ANSI Truecolor code representing an RGBColor
+func (c *RGBColor) ToForegroundTrueColor() string {
 	return fmt.Sprintf("\033[38;2;%d;%d;%dm", c.getR(), c.getG(), c.getB())
+}
+
+// ToBackgroundTrueColor generates a background ANSI Truecolor code representing an RGBColor
+func (c *RGBColor) ToBackgroundTrueColor() string {
+	return fmt.Sprintf("\033[48;2;%d;%d;%dm", c.getR(), c.getG(), c.getB())
 }
 
 // CreateHSV creates an HSVColor from the h, s, v components
@@ -81,8 +86,14 @@ func (c *HSVColor) ToRGB() RGBColor {
 	return HSVtoRGB(*c)
 }
 
-// ToTrueColor converts an HSVColor to an RGBColor, then to an ANSI Truecolor code representing that RGBColor
-func (c *HSVColor) ToTrueColor() string {
+// ToForegroundTrueColor converts an HSVColor to an RGBColor, then to a foreground ANSI Truecolor code representing that RGBColor
+func (c *HSVColor) ToForegroundTrueColor() string {
 	rgb := c.ToRGB()
-	return (&rgb).ToTrueColor()
+	return (&rgb).ToForegroundTrueColor()
+}
+
+// ToBackgroundTrueColor converts an HSVColor to an RGBColor, then to a background ANSI Truecolor code representing that RGBColor
+func (c *HSVColor) ToBackgroundTrueColor() string {
+	rgb := c.ToRGB()
+	return (&rgb).ToBackgroundTrueColor()
 }

@@ -67,10 +67,10 @@ func PrintMatrix(height int, word bool) {
 			if y-r < height && y-r > 0 {
 				util.CursorPos(x, y-r)
 				if r == 0 {
-					fmt.Print(util.ApplyColor("", util.BRIGHTWHITE))
+					fmt.Print(util.ApplyForegroundColor("", util.BRIGHTWHITE))
 				} else {
 					color := util.CreateHSV(120, 100, 20+int(80*(float64(float64(numLetters-r)/float64(numLetters)))))
-					fmt.Print(color.ToTrueColor())
+					fmt.Print(color.ToForegroundTrueColor())
 				}
 				fmt.Print(line.letters[r])
 			}

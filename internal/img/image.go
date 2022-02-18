@@ -100,7 +100,7 @@ func DisplayImage(src image.Image) {
 			level := int(math.Min(float64((g.Y/51+c.A/51)/2), float64(4))) // 51 * 5 = 255
 			util.CursorPos(x*2, y)
 			col := util.CreateRGB(int(c.R), int(c.G), int(c.B))
-			fmt.Print((&col).ToTrueColor())
+			fmt.Print((&col).ToForegroundTrueColor())
 			fmt.Print(levels[level] + levels[level])
 		}
 	}

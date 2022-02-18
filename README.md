@@ -4,6 +4,7 @@
 
 ---
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/PepperLola/matrix)](https://goreportcard.com/report/github.com/PepperLola/matrix)
 ![GitHub issues](https://img.shields.io/github/issues-raw/PepperLola/matrix)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PepperLola/matrix)
 ![MIT License](https://img.shields.io/github/license/PepperLola/matrix)

@@ -28,11 +28,11 @@ func main() {
 		patterns.StartMatrix(fps, alphabet, interval, word)
 		break
 	case "image":
-		image := img.OpenImage("test.png")
+		image := img.OpenImage(path)
 		img.DisplayImage(img.ResizeImage(image, scale))
 		break
 	case "gif":
-		image := img.OpenGif("test.gif")
+		image := img.OpenGif(path)
 		img.DisplayGif(fps, image, scale)
 		break
 	}

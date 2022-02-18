@@ -6,5 +6,5 @@ import (
 
 // RandomBetween generates a random integer between a min int and a max int
 func RandomBetween(min int, max int) int {
-	return rand.Intn(max-min) + min
+	return rand.Intn(max - min) + min
 }

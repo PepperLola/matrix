@@ -94,7 +94,7 @@ func DisplayImage(src image.Image) {
 	levels := []string{" ", "░", "▒", "▓", "█"}
 
 	for y := src.Bounds().Min.Y; y < src.Bounds().Max.Y; y++ {
-		for x := src.Bounds().Min.X; x < src.Bounds().Max.X; x ++ {
+		for x := src.Bounds().Min.X; x < src.Bounds().Max.X; x++ {
 			c := color.RGBAModel.Convert(src.At(x, y)).(color.RGBA)
 			g := color.GrayModel.Convert(src.At(x, y)).(color.Gray)
 			level := int(math.Min(float64((g.Y/51+c.A/51)/2), float64(4))) // 51 * 5 = 255

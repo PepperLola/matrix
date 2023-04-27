@@ -48,7 +48,7 @@ func RandomLetter() string {
 }
 
 // PrintMatrix prints out all of the lines to the console
-func PrintMatrix(height int, word bool) {
+func PrintMatrix(height int, word bool, reverse bool) {
 	for _, line := range lines {
 		x := line.x
 		y := line.y
@@ -59,7 +59,11 @@ func PrintMatrix(height int, word bool) {
 		// prevents overflow by printing all letters based on number of letters
 		numLetters := int(math.Min(float64(line.length), float64(len(line.letters))))
 		if word {
-			line.letters = append(line.letters, alphabet[numLetters%len(alphabet)])
+            var i = numLetters % len(alphabet)
+            if reverse {
+                i = len(alphabet) - i - 1
+            }
+			line.letters = append(line.letters, alphabet[i])
 		} else {
 			line.letters = append(line.letters, RandomLetter())
 		}
@@ -79,7 +83,7 @@ func PrintMatrix(height int, word bool) {
 }
 
 // StartMatrix manages and adds lines and controls the animation loop
-func StartMatrix(fps int, customAlphabet string, interval int, word bool) {
+func StartMatrix(fps int, customAlphabet string, interval int, word bool, reverse bool) {
 	if len(customAlphabet) > 0 {
 		alphabet = strings.Split(customAlphabet, "")
 	}
@@ -115,7 +119,7 @@ func StartMatrix(fps int, customAlphabet string, interval int, word bool) {
 		}
 
 		util.SaveCursor()
-		PrintMatrix(height, word)
+		PrintMatrix(height, word, reverse)
 		util.RestoreCursor()
 		time.Sleep(time.Second / time.Duration(fps))
 	}

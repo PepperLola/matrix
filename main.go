@@ -11,8 +11,9 @@ func main() {
 	var scale float64
 	var interval int
 	var alphabet string
-  var text string
+      var text string
 	var word bool
+    var reverse bool
 	var fps int
 	flag.StringVar(&mode, "mode", "matrix", "Mode to run")
 	flag.StringVar(&path, "path", "test.png", "File path for image")
@@ -21,12 +22,13 @@ func main() {
 	flag.StringVar(&alphabet, "alphabet", "", "Custom alphabet for matrix lines and code cracking")
   flag.StringVar(&text, "text", "", "Custom text for matrix cracking")
 	flag.BoolVar(&word, "word", false, "Word mode preserves order of given alphabet in matrix mode")
+    flag.BoolVar(&reverse, "reverse", false, "Reverse the alphabet in word mode")
 	flag.IntVar(&fps, "fps", 10, "Number of frame updates per second")
 	flag.Parse()
 
 	switch mode {
 	case "matrix":
-		patterns.StartMatrix(fps, alphabet, interval, word)
+		patterns.StartMatrix(fps, alphabet, interval, word, reverse)
 		break
 	case "image":
 		patterns.DisplayImage(path, scale)
